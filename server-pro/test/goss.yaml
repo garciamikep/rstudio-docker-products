@@ -12,6 +12,9 @@ file:
 
 # check product version
 command:
+  # protect against bad jupyter installation
+  "echo '{ \"cells\": [], \"metadata\": {}, \"nbformat\": 4, \"nbformat_minor\": 2}' | jupyter nbconvert --to notebook --stdin --stdout":
+    exit-status: 0
   "/usr/lib/rstudio-server/bin/rstudio-server version":
     title: server-pro_version_matches
     exit-status: 0
