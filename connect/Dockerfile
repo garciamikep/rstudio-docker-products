@@ -30,6 +30,16 @@ RUN curl -O https://s3.amazonaws.com/rstudio-connect/rstudio-connect_${RSC_VERSI
     gdebi -n rstudio-connect_${RSC_VERSION}_amd64.deb && \
     rm rstudio-connect_${RSC_VERSION}_amd64.deb
 
+# Install RStudio Professional Drivers ----------------------------------------#
+
+ARG DRIVERS_VERSION=1.6.0
+RUN apt-get update -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y unixodbc unixodbc-dev gdebi && \
+    curl -O https://drivers.rstudio.org/7C152C12/installer/rstudio-drivers_${DRIVERS_VERSION}_amd64.deb && \
+    DEBIAN_FRONTEND=noninteractive gdebi --non-interactive rstudio-drivers_${DRIVERS_VERSION}_amd64.deb && \
+    rm rstudio-drivers_${DRIVERS_VERSION}_amd64.deb && \
+    cat /opt/rstudio-drivers/odbcinst.ini.sample | tee /etc/odbcinst.ini
+
 # Runtime settings ------------------------------------------------------------#
 ARG TINI_VERSION=0.18.0
 RUN curl -L -o /usr/local/bin/tini https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini && \
