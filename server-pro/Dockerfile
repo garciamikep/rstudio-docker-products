@@ -1,4 +1,4 @@
-ARG R_VERSION=3.6
+ARG R_VERSION=3.6.2
 FROM rstudio/r-base:${R_VERSION}-bionic
 LABEL maintainer="RStudio Docker <docker@rstudio.com>"
 
@@ -38,6 +38,19 @@ ARG RSP_DOWNLOAD_URL=https://download2.rstudio.org/server/trusty/amd64
 RUN curl -O ${RSP_DOWNLOAD_URL}/rstudio-server-pro-${RSP_VERSION}-amd64.deb && \
     gdebi --non-interactive rstudio-server-pro-${RSP_VERSION}-amd64.deb && \
     rm rstudio-server-pro-${RSP_VERSION}-amd64.deb
+
+# Install RStudio Professional Drivers ----------------------------------------#
+
+ARG DRIVERS_VERSION=1.6.0
+RUN apt-get update -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y unixodbc unixodbc-dev gdebi && \
+    curl -O https://drivers.rstudio.org/7C152C12/installer/rstudio-drivers_${DRIVERS_VERSION}_amd64.deb && \
+    DEBIAN_FRONTEND=noninteractive gdebi --non-interactive rstudio-drivers_${DRIVERS_VERSION}_amd64.deb && \
+    rm rstudio-drivers_${DRIVERS_VERSION}_amd64.deb && \
+    cat /opt/rstudio-drivers/odbcinst.ini.sample | tee /etc/odbcinst.ini
+
+# install latest versions of important IDE packages
+RUN /opt/R/${R_VERSION}/bin/R -e "install.packages(c(\"odbc\", \"rsconnect\", \"rstudioapi\"), repos=\"https://demo.rstudiopm.com/all/__linux__/bionic/latest\")"
 
 # Runtime settings ------------------------------------------------------------#
 ARG TINI_VERSION=0.18.0
