@@ -48,6 +48,18 @@ We also want to thank [this
 article](https://windsock.io/automated-docker-image-builds-with-multiple-tags/)
 for the inspiration behind our tagging process.
 
+## Scheduled Builds
+
+DockerHub makes a webhook API request available that can trigger builds. A
+simple POST request triggers builds. This is very useful, for example, for the
+`rstudio/rstudio-server-pro:daily` image to _actually_ be built daily.
+
+We do this with a Parameterized R Markdown report deployed to RStudio Connect,
+running on a schedule. The source code is here, and this case in particular
+is running on our internal Connect server:
+
+https://github.com/sol-eng/webhook-trigger
+
 ### Test the Docker Hub hooks
 
 The `hooks` are just bash scripts, so they _can_ be tested locally. Let's take
