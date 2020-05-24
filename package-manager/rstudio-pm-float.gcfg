@@ -1,3 +1,6 @@
+[Licensing]
+LicenseType = remote
+
 [HTTP]
 Listen = :4242
 
@@ -9,6 +12,3 @@ RVersion = /opt/R/3.6.2/
 
 [Git]
 BuilderDir = "/tmp/git"
-
-[Metrics]
-Enabled = true

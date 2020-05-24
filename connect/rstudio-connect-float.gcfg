@@ -1,5 +1,8 @@
 ; RStudio Connect configuration file
 
+[Licensing]
+LicenseType = remote
+
 [Server]
 ; SenderEmail is an email address used by RStudio Connect to send outbound
 ; email. The system will not be able to send administrative email until this
@@ -33,8 +36,8 @@ Provider = password
 Enabled = true
 Executable = /opt/python/3.6.5/bin/python
 
-[RPackageRepository "CRAN"]
-URL = https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
-
-[RPackageRepository "RSPM"]
-URL = https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
+;[RPackageRepository "CRAN"]
+;URL = https://demo.rstudiopm.com/all/__linux__/bionic/latest
+;
+;[RPackageRepository "RSPM"]
+;URL = https://demo.rstudiopm.com/all/__linux__/bionic/latest

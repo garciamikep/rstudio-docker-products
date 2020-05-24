@@ -1,8 +1,23 @@
+user:
+  rstudio-pm:
+    exists: true
+    uid: 999
+    gid: 999
+
+group:
+  rstudio-pm:
+    exists: true
+    gid: 999
+
 package:
   rstudio-pm:
     installed: true
 
 file:
+  /etc/rstudio-pm/license.lic:
+    # currently does not exist
+    # be sure it is NOT a directory
+    exists: false
   /opt/rstudio-pm/:
     exists: true
   /opt/rstudio-pm/bin/rstudio-pm:
