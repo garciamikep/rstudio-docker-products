@@ -1,6 +1,6 @@
 R_VERSION ?= 3.6.2
 
-RSP_VERSION ?= 1.3.1093-1
+RSP_VERSION ?= 1.4.999-11
 RSC_VERSION ?= 1.8.4.2-2
 RSPM_VERSION ?= 1.2.0-16
 
@@ -56,7 +56,7 @@ update-versions:  ## Update the version files for all products
 
 rsp: server-pro
 server-pro:  ## Build RSP image
-	docker build -t rstudio/rstudio-server-pro:$(RSP_VERSION) --build-arg R_VERSION=$(R_VERSION) --build-arg RSP_VERSION=$(RSP_VERSION) server-pro
+	docker build -t rstudio/rstudio-server-pro:$(RSP_VERSION) --build-arg RSP_DOWNLOAD_URL=https://s3.amazonaws.com/rstudio-ide-build/server/bionic/amd64 --build-arg R_VERSION=$(R_VERSION) --build-arg RSP_VERSION=$(RSP_VERSION) server-pro
 
 rsp-hook:
 	cd ./server-pro && \
