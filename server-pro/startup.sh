@@ -13,6 +13,8 @@ deactivate() {
     echo " --> TAIL 100 monitor/log/rstudio-server.log"
     tail -100 /var/lib/rstudio-server/monitor/log/rstudio-server.log
 
+    echo "Stopping the server ..."
+    rstudio-server stop
     echo "Deactivating license ..."
     rstudio-server license-manager deactivate >/dev/null 2>&1
 
